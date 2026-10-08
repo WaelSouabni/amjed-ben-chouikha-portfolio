@@ -234,5 +234,49 @@ const closeProject=()=>{projectModal.classList.remove("open");projectModal.setAt
 document.querySelectorAll(".project[data-project]").forEach(card=>card.addEventListener("click",()=>setProject(card.dataset.project)));
 document.querySelectorAll("[data-close-project]").forEach(el=>el.addEventListener("click",closeProject));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&projectModal.classList.contains("open"))closeProject()});
+</script>
+<script>
+const baseApplyLanguage=applyLanguage;
+const newCopy={
+fr:{
+aboutTitle:"Transformer les idées en expériences que l'on peut <em>vivre.</em>",
+about1:"Basé à Djerba, Amjed Ben Chouikha évolue à la croisée du tourisme, du marketing digital et de la communication créative. Son travail va de la stratégie à l’exécution : structurer des offres, construire des récits de marque, créer du contenu et donner vie aux campagnes.",
+about2:"Avec une expérience auprès d’agences de voyage, de l’hospitalité, de destinations et d’événements, il aborde chaque projet avec les deux mêmes exigences : l’objectif business et l’expérience du public.",
+proofTitle:"Présence professionnelle",
+proofDesc:"Retrouvez Amjed sur ses profils professionnels et vérifiez le contexte des collaborations présentées dans ce portfolio.",
+proof1:"Profil professionnel · Midoun · Israa Travel Agency",proof2:"Contexte professionnel et affiliation dans le secteur du voyage.",
+proofCompany:"Israa Travel Agency ↗"
+},
+en:{
+aboutTitle:"Turning ideas into experiences people can <em>feel.</em>",
+about1:"Based in Djerba, Amjed Ben Chouikha works at the intersection of tourism, digital marketing and creative communication. His work moves from strategy to execution: shaping offers, building brand stories, creating content and bringing campaigns to life.",
+about2:"With experience around travel agencies, hospitality, destinations and events, he approaches each project from both sides — the business objective and the audience experience.",
+proofTitle:"Professional Presence",
+proofDesc:"Where to find Amjed professionally and verify the work context behind this portfolio.",
+proof1:"Professional profile · Midoun · Israa Travel Agency",proof2:"Travel agency context and professional affiliation.",
+proofCompany:"Israa Travel Agency ↗"
+}};
+const projectFr={
+aurum:["Tourisme premium","Un concept touristique premium autour du désert, de l’identité et d’expériences mémorables.","Concept · Naming · Identité","Positionnement premium · Désert","Aurum réunit storytelling de destination, positionnement premium et direction visuelle pour faire du désert une expérience à part entière."],
+mirage:["B2B · Marché saoudien","Un projet de stratégie digitale axé sur le positionnement, la structuration d’équipe et la communication pour le marché arabe.","Stratégie digitale · Formation","Positionnement · Accompagnement d’équipe","Le projet combine réflexion stratégique et mise en œuvre concrète : clarifier l’offre, structurer l’équipe digitale et adapter la communication au marché ciblé."],
+tezda:["Immobilier","Une direction marketing pour Djerba et des expériences de location de maisons haut de gamme.","Stratégie marketing","Djerba · Locations premium","L’objectif est de valoriser Djerba comme destination tout en rendant l’offre immobilière plus claire, visible et désirable grâce à une approche marketing cohérente."],
+djerbavip:["Destination","Un projet de communication et de formation d’équipe autour des expériences familiales à Djerba.","Formation équipe digitale · Communication","Expérience destination","Le travail relie montée en compétence de l’équipe et storytelling de destination pour transformer les expériences locales en communication plus claire et engageante."],
+toumi:["Hospitalité","Un projet d’identité pour l’hospitalité mêlant logo, menus et communication visuelle.","Identité de marque · Print","Hospitalité · Cohérence visuelle","L’objectif était de créer un langage visuel cohérent sur les supports que les clients voient et utilisent réellement."],
+stanbeat:["Branding","Un projet de communication créative couvrant identité, supports print et planification de campagne.","Identité · Affiches · Brochures","Communication de marque","Une mission de branding multidisciplinaire reliant identité visuelle, supports de communication et planification de campagne."]
+};
+function refreshNewLanguage(lang){
+ const t=newCopy[lang]||newCopy.en;
+ const h=document.querySelector("#about .about-copy h3"),ps=document.querySelectorAll("#about .about-copy p"),ph=document.querySelector("#proof .section-head h2"),pp=document.querySelector("#proof .section-head p"),pc=document.querySelectorAll(".proof-card");
+ if(h)h.innerHTML=t.aboutTitle;if(ps[0])ps[0].textContent=t.about1;if(ps[1])ps[1].textContent=t.about2;
+ if(ph)ph.textContent=t.proofTitle;if(pp)pp.textContent=t.proofDesc;
+ if(pc[0]){pc[0].querySelector("p").textContent=t.proof1}
+ if(pc[1]){pc[1].querySelector("h3").textContent=t.proofCompany;pc[1].querySelector("p").textContent=t.proof2}
+ const title=document.getElementById("project-modal-title");const key=title?.dataset.key;
+ if(key&&lang==="fr"&&projectFr[key]){
+   const d=projectFr[key];document.getElementById("project-modal-kicker").textContent=d[0];document.getElementById("project-modal-summary").textContent=d[1];document.getElementById("project-modal-role").textContent=d[2];document.getElementById("project-modal-focus").textContent=d[3];document.getElementById("project-modal-story").textContent=d[4];
+ }
+}
+applyLanguage=function(lang){baseApplyLanguage(lang);refreshNewLanguage(lang)};
+refreshNewLanguage(currentLang);
 </script></body>
 </html>
