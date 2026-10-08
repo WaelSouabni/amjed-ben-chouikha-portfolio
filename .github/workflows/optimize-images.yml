@@ -1,0 +1,61 @@
+name: Optimize local portfolio images
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "index.html"
+      - ".github/workflows/optimize-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare image directory
+        run: mkdir -p assets/images/projects
+
+      - name: Download source photos
+        run: |
+          set -e
+          curl -L --fail --retry 3 -o /tmp/tunis.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/MedinaTunis.jpg/640px-MedinaTunis.jpg"
+          curl -L --fail --retry 3 -o /tmp/djerba.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Plage_de_djerba.jpg/640px-Plage_de_djerba.jpg"
+          curl -L --fail --retry 3 -o /tmp/tozeur.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Tozeur_Tunisia.jpg/640px-Tozeur_Tunisia.jpg"
+          curl -L --fail --retry 3 -o /tmp/hammamet.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Hammamet_Tunisia.jpg/640px-Hammamet_Tunisia.jpg"
+          curl -L --fail --retry 3 -o /tmp/douz.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Douz_Tunisia.jpg/640px-Douz_Tunisia.jpg"
+          curl -L --fail --retry 3 -o /tmp/sidi-bou-said.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Sidi_bou_said%2C_tunis.jpg/640px-Sidi_bou_said%2C_tunis.jpg"
+
+      - name: Convert to optimized WebP
+        run: |
+          set -e
+          command -v magick
+          magick /tmp/tunis.jpg -strip -resize "1280x1280>" -quality 82 assets/images/projects/tunis.webp
+          magick /tmp/djerba.jpg -strip -resize "1280x1280>" -quality 82 assets/images/projects/djerba.webp
+          magick /tmp/tozeur.jpg -strip -resize "1280x1280>" -quality 82 assets/images/projects/tozeur.webp
+          magick /tmp/hammamet.jpg -strip -resize "1280x1280>" -quality 82 assets/images/projects/hammamet.webp
+          magick /tmp/douz.jpg -strip -resize "1280x1280>" -quality 82 assets/images/projects/douz.webp
+          magick /tmp/sidi-bou-said.jpg -strip -resize "1280x1280>" -quality 82 assets/images/projects/sidi-bou-said.webp
+
+      - name: Verify local assets
+        run: |
+          set -e
+          test "$(find assets/images/projects -name '*.webp' | wc -l)" -eq 6
+          du -h assets/images/projects/*
+
+      - name: Commit optimized assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/projects
+          if git diff --cached --quiet; then
+            echo "No image changes to commit."
+          else
+            git commit -m "perf: add optimized local project images"
+            git push
+          fi
