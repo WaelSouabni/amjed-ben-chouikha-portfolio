@@ -26,12 +26,12 @@ jobs:
       - name: Download source photos
         run: |
           set -euxo pipefail
-          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/tunis.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/MedinaTunis.jpg/640px-MedinaTunis.jpg"
-          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/djerba.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Plage_de_djerba.jpg/640px-Plage_de_djerba.jpg"
-          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/tozeur.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Tozeur_Tunisia.jpg/640px-Tozeur_Tunisia.jpg"
-          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/hammamet.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Hammamet_Tunisia.jpg/640px-Hammamet_Tunisia.jpg"
-          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/douz.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Douz_Tunisia.jpg/640px-Douz_Tunisia.jpg"
-          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/sidi-bou-said.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Sidi_bou_said%2C_tunis.jpg/640px-Sidi_bou_said%2C_tunis.jpg"
+          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/tunis.jpg "https://commons.wikimedia.org/wiki/Special:Redirect/file/MedinaTunis.jpg?width=640"
+          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/djerba.jpg "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plage_de_djerba.jpg?width=640"
+          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/tozeur.jpg "https://commons.wikimedia.org/wiki/Special:Redirect/file/Tozeur_Tunisia.jpg?width=640"
+          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/hammamet.jpg "https://commons.wikimedia.org/wiki/Special:Redirect/file/Hammamet_Tunisia.jpg?width=640"
+          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/douz.jpg "https://commons.wikimedia.org/wiki/Special:Redirect/file/Douz_Tunisia.jpg?width=640"
+          curl -fsSL --retry 5 --retry-delay 2 -o /tmp/sidi-bou-said.jpg "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sidi_bou_said%2C_tunis.jpg?width=640"
 
       - name: Install WebP tools
         run: |
