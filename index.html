@@ -130,7 +130,7 @@ window.addEventListener("resize",()=>{if(window.innerWidth>800)closeMobileMenu()
 let currentLang=localStorage.getItem("amjed-language")||"fr";
 function applyLanguage(lang){
  currentLang=lang; localStorage.setItem("amjed-language",lang); document.documentElement.lang=lang;
- const t=translations[lang]; document.getElementById("page-title").textContent=lang==="fr"?"Amjed Ben Chouikha — Tourisme × Digital × Expériences":"Amjed Ben Chouikha — Tourism × Digital × Experiences";
+ const t=translations[lang]; document.querySelector('meta[property="og:title"]').content=lang==="fr"?"Amjed Ben Chouikha — Tourisme × Digital × Expériences":"Amjed Ben Chouikha — Tourism × Digital × Experiences"; document.querySelector('meta[property="og:description"]').content=lang==="fr"?"Marketing digital, innovation touristique, communication et expériences de voyage.":"Digital marketing, tourism innovation, communication and travel experiences."; document.querySelector('meta[name="twitter:title"]').content=document.querySelector('meta[property="og:title"]').content; document.querySelector('meta[name="twitter:description"]').content=document.querySelector('meta[property="og:description"]').content; document.getElementById("page-title").textContent=lang==="fr"?"Amjed Ben Chouikha — Tourisme × Digital × Expériences":"Amjed Ben Chouikha — Tourism × Digital × Experiences";
  document.getElementById("meta-description").content=lang==="fr"?"Amjed Ben Chouikha — Marketing digital, innovation touristique, communication et expériences de voyage.":"Amjed Ben Chouikha — Digital marketing, tourism innovation, communication and travel experiences.";
  const links=document.querySelectorAll(".links>a"); t.nav.forEach((x,i)=>links[i].textContent=x); const mobileLinks=document.querySelectorAll("#mobile-menu>a"); t.nav.forEach((x,i)=>mobileLinks[i].textContent=x);
  document.querySelector(".hero .eyebrow").textContent=t.eyebrow; document.querySelector(".hero h1").innerHTML=t.heroTitle; document.querySelector(".hero .lead").textContent=t.heroLead;
@@ -184,7 +184,7 @@ const quiz=document.getElementById("quiz-game");
 let qState={round:0,score:0,lives:3,streak:0,timer:null,locked:false,order:[]};
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
 function quizStart(){qState={round:0,score:0,lives:3,streak:0,timer:null,locked:false,order:shuffle(places)};renderQuizRound()}
-function renderQuizStart(){quiz.innerHTML='<div class="game-start"><span class="game-emoji">📸</span><h4>Guess Tunisia</h4><p>6 photos · 3 lives · 8 seconds per round. How well do you know Tunisia?</p><button class="btn primary" id="quiz-start">Start game</button></div>';document.getElementById("quiz-start").onclick=quizStart}
+function renderQuizStart(){const t=translations[currentLang];quiz.innerHTML='<div class="game-start"><span class="game-emoji">📸</span><h4>'+t.gameTitles[0]+'</h4><p>'+t.gameStartDesc[0]+'</p><button class="btn primary" id="quiz-start">'+t.gameStarts[0]+'</button></div>';document.getElementById("quiz-start").onclick=quizStart}
 function renderQuizRound(){
 if(qState.lives<=0||qState.round>=qState.order.length){renderQuizResult();return}
 clearInterval(qState.timer);qState.locked=false;const p=qState.order[qState.round];
@@ -207,7 +207,7 @@ renderQuizStart();
 
 const revealGame=document.getElementById("reveal-game");let revealState={round:0,score:0,place:null,revealed:0,locked:false};
 function revealStart(){revealState={round:0,score:0,place:null,revealed:0,locked:false};renderReveal()}
-function renderRevealStart(){revealGame.innerHTML='<div class="game-start"><span class="game-emoji">🔍</span><h4>Reveal Tunisia</h4><p>Open as few tiles as possible, then guess the destination.</p><button class="btn primary" id="reveal-start">Start game</button></div>';document.getElementById("reveal-start").onclick=revealStart}
+function renderRevealStart(){const t=translations[currentLang];revealGame.innerHTML='<div class="game-start"><span class="game-emoji">🔍</span><h4>'+t.gameTitles[1]+'</h4><p>'+t.gameStartDesc[1]+'</p><button class="btn primary" id="reveal-start">'+t.gameStarts[1]+'</button></div>';document.getElementById("reveal-start").onclick=revealStart}
 function renderReveal(){
 if(revealState.round>=4){revealGame.innerHTML='<div class="result"><div class="result-icon">✨</div><span class="num">FINAL SCORE</span><div class="result-score">'+revealState.score+'</div><p>You completed 4 destination reveals.</p><button class="btn primary" id="reveal-restart">Play again ↻</button></div>';document.getElementById("reveal-restart").onclick=revealStart;return}
 revealState.place=shuffle(places)[0];revealState.revealed=0;revealState.locked=false;const p=revealState.place;
@@ -222,7 +222,7 @@ const memoryGame=document.getElementById("memory-game");
 const memoryPlaces=places.slice(0,6);
 let memoryState={cards:[],first:null,second:null,lock:false,moves:0,matches:0,start:null,timer:null,score:0};
 function memoryStart(){clearInterval(memoryState.timer);const cards=shuffle([...memoryPlaces,...memoryPlaces]).map((p,i)=>({id:i,name:p.name,image:p.image,flipped:false,matched:false}));memoryState={cards,first:null,second:null,lock:false,moves:0,matches:0,start:Date.now(),timer:null,score:0};renderMemory();memoryState.timer=setInterval(updateMemoryTime,1000)}
-function renderMemoryStart(){memoryGame.innerHTML='<div class="game-start"><span class="game-emoji">🧠</span><h4>Tunisia Memory</h4><p>Match 6 destination pairs. Find them with the fewest moves.</p><button class="btn primary" id="memory-start">Start game</button></div>';document.getElementById("memory-start").onclick=memoryStart}
+function renderMemoryStart(){const t=translations[currentLang];memoryGame.innerHTML='<div class="game-start"><span class="game-emoji">🧠</span><h4>'+t.gameTitles[2]+'</h4><p>'+t.gameStartDesc[2]+'</p><button class="btn primary" id="memory-start">'+t.gameStarts[2]+'</button></div>';document.getElementById("memory-start").onclick=memoryStart}
 function updateMemoryTime(){const el=document.getElementById("memory-time");if(!el)return;el.textContent=Math.floor((Date.now()-memoryState.start)/1000)+"s"}
 function renderMemory(){memoryGame.innerHTML='<div class="memory-stats"><span>Moves <strong>'+memoryState.moves+'</strong></span><span>Pairs <strong>'+memoryState.matches+'/6</strong></span><span>Time <strong id="memory-time">0s</strong></span><span>Score <strong>'+memoryState.score+'</strong></span></div><div class="memory-board">'+memoryState.cards.map((c,i)=>'<button class="memory-card '+(c.flipped||c.matched?'flipped ':'')+(c.matched?'matched':'')+'" data-index="'+i+'"><span class="memory-inner"><span class="memory-face memory-back">✦</span><span class="memory-face memory-front"><img src="'+c.image+'" alt="'+c.name+'" loading="lazy" decoding="async"></span></span></button>').join('')+'</div><div class="memory-message" id="memory-message">Find a pair.</div>';
 memoryGame.querySelectorAll(".memory-card").forEach(b=>b.onclick=()=>memoryFlip(Number(b.dataset.index)))}
