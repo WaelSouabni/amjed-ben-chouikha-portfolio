@@ -146,7 +146,6 @@ themeToggle.onclick=()=>{
   updateThemeToggle();
 };
 updateThemeToggle();
-applyLanguage(currentLang);
 
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
@@ -209,6 +208,7 @@ memoryGame.querySelectorAll(".memory-card").forEach(b=>b.onclick=()=>memoryFlip(
 function memoryFlip(i){if(memoryState.lock||memoryState.cards[i].flipped||memoryState.cards[i].matched)return;memoryState.cards[i].flipped=true;renderMemory();if(memoryState.first===null){memoryState.first=i;return}memoryState.second=i;memoryState.moves++;const a=memoryState.cards[memoryState.first],b=memoryState.cards[memoryState.second];if(a.name===b.name){a.matched=b.matched=true;memoryState.matches++;memoryState.score+=Math.max(100-memoryState.moves*3,25);memoryState.first=memoryState.second=null;renderMemory();const m=document.getElementById("memory-message");m.className="memory-message good";m.textContent="Match! + points ✨";if(memoryState.matches===6){clearInterval(memoryState.timer);setTimeout(memoryResult,500)}}else{memoryState.lock=true;renderMemory();const m=document.getElementById("memory-message");m.className="memory-message bad";m.textContent="Not a pair — try again.";setTimeout(()=>{a.flipped=b.flipped=false;memoryState.first=memoryState.second=null;memoryState.lock=false;renderMemory()},700)}}
 function memoryResult(){const seconds=Math.floor((Date.now()-memoryState.start)/1000);memoryGame.innerHTML='<div class="result"><div class="result-icon">🧠</div><span class="num">MEMORY COMPLETE</span><div class="result-score">'+memoryState.score+'</div><p>'+memoryState.moves+' moves · '+seconds+' seconds</p><button class="btn primary" id="memory-restart">Play again ↻</button></div>';document.getElementById("memory-restart").onclick=memoryStart}
 renderMemoryStart();
+applyLanguage(currentLang);
 </script>
 </body>
 </html>
