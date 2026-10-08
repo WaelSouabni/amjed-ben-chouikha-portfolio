@@ -69,7 +69,7 @@ section{padding:110px 0;border-top:1px solid rgba(255,255,255,.06)}.section-head
 <article class="lab-card lab-card-wide reveal">
 <div class="lab-top"><span class="num">2019 · WESTERWELLE STARTUP HAUS</span><span class="lab-icon">♻</span></div>
 <h3>3D Recycling Adventure</h3><p>Educational game concept designed to raise children's awareness about recycling and the environment — from ideation to final realization.</p>
-<a class="btn" href="#contact">Build an experience ↗</a>
+<a class="btn" href="#contact">Build an experience ↗</a><p class="lab-note">Game photography: Wikimedia Commons · CC BY-SA. Authors: Noomen9, Arij Tozeuroise, Fatoumatouta12345, Majdi15ca, Lassaad Aouichaoui and Roquex.</p>
 </article>
 </div></div></section>
 
@@ -81,12 +81,12 @@ const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isInte
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 const places=[
-{name:"Djerba",image:"https://images.unsplash.com/photo-1597248738888-6b7e5a3b6c52?auto=format&fit=crop&w=1000&q=80",fact:"Island life, crafts and whitewashed villages.",choices:["Djerba","Tozeur","Douz","Sidi Bou Saïd"]},
-{name:"Tozeur",image:"https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1000&q=80",fact:"Oasis landscapes and the gateway to the desert.",choices:["Hammamet","Tozeur","Djerba","Sidi Bou Saïd"]},
-{name:"Douz",image:"https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=80",fact:"Golden dunes and Sahara adventure.",choices:["Douz","Tunis","Djerba","Tozeur"]},
-{name:"Sidi Bou Saïd",image:"https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1000&q=80",fact:"Blue-and-white architecture above the Mediterranean.",choices:["Tozeur","Douz","Sidi Bou Saïd","Djerba"]},
-{name:"Hammamet",image:"https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=80",fact:"Mediterranean beaches and a historic medina.",choices:["Hammamet","Douz","Tozeur","Djerba"]},
-{name:"Tunis",image:"https://images.unsplash.com/photo-1539020140153-e8c7e3d7f8d3?auto=format&fit=crop&w=1000&q=80",fact:"A lively capital mixing medina heritage and modern culture.",choices:["Djerba","Tunis","Douz","Hammamet"]}
+{name:"Djerba",image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Plage_de_djerba.jpg/1280px-Plage_de_djerba.jpg",fact:"Island life, crafts and whitewashed villages.",choices:["Djerba","Tozeur","Douz","Sidi Bou Saïd"]},
+{name:"Tozeur",image:"https://upload.wikimedia.org/wikipedia/commons/2/2b/Tozeur_Tunisia.jpg",fact:"Oasis landscapes and the gateway to the desert.",choices:["Hammamet","Tozeur","Djerba","Sidi Bou Saïd"]},
+{name:"Douz",image:"https://upload.wikimedia.org/wikipedia/commons/d/df/Douz_Tunisia.jpg",fact:"Golden dunes and Sahara adventure.",choices:["Douz","Tunis","Djerba","Tozeur"]},
+{name:"Sidi Bou Saïd",image:"https://upload.wikimedia.org/wikipedia/commons/4/4f/Sidi_bou_said%2C_tunis.jpg",fact:"Blue-and-white architecture above the Mediterranean.",choices:["Tozeur","Douz","Sidi Bou Saïd","Djerba"]},
+{name:"Hammamet",image:"https://upload.wikimedia.org/wikipedia/commons/7/7b/Hammamet_Tunisia.jpg",fact:"Mediterranean beaches and a historic medina.",choices:["Hammamet","Douz","Tozeur","Djerba"]},
+{name:"Tunis",image:"https://upload.wikimedia.org/wikipedia/commons/1/13/MedinaTunis.jpg",fact:"A lively capital mixing medina heritage and modern culture.",choices:["Djerba","Tunis","Douz","Hammamet"]}
 ];
 
 const quiz=document.getElementById("quiz-game");
